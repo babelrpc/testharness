@@ -1,0 +1,53 @@
+<div class="container">
+  <div class="navbar navbar-default">
+    <div class="container">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="#">Babel Test Harness</a>      
+      </div>
+      <div class="navbar-right">
+      </div>
+    </div>
+  </div>
+  <div>
+    <p>Welcome to the Babel Test Harness! The test harness allows developers to generate JSON files that describe their services via the serivce babel IDL file and from there can functionally test services as well as see sample JSON that represents the call to the service.</p>
+    <p>NOTE - That all comments added to the babel IDL file will also show in the babe test harness which can provide a good way to provide documentation and discovery for services.
+  </div>
+  <br/>
+  <div style="width: 200px;">
+    <h4>Service Details:</h4>
+    <select id="serviceSelect" class="form-control">
+      <option value='def'>Choose Service</option>
+      {{#each serviceArray}}
+        <option value='{{name}}'>{{name}}</option>
+      {{/each}}        
+    </select>    
+  </div>
+  <br/>
+  <div>
+    <h4>Direct Link:</h4>
+    <p>You can also directly access a service by using the following url examples;</p>
+    <ul>
+      <li>{{homeUrl}}#srv/ServiceName</li>
+      <li>{{homeUrl}}#srv/ServiceName/methodName</li>
+    </ul>
+  </div>
+  <br/>
+  <div>
+    <h4>Service Setup:</h4>
+    <p>Don't see your service, it is easy to add, just following these simple instructions;</p>
+    <ol>
+      <li>Generate a JSON file.<br/><br/>
+      <pre><p>babel -lang test -output to_some_dir MyService.babel</p></pre>
+      </li>
+      <li>Register your service in the babel.json file. <em>(Location will depend on where the test harness is hosted for your project)</em><br/><br/>
+      <pre>
+"services":[
+  {
+    "name":"MyService",
+    "path":"/&lt;&lt;location of generated JSON file&gt;&gt;/MyService.json"
+  }   
+]</pre>
+      </li>
+    </ol>
+  </div>  
+</div>

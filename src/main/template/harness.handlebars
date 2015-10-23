@@ -1,0 +1,130 @@
+<div class="container">
+  <div class="navbar navbar-default">
+    <div class="container">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="#">Babel Test Harness</a>      
+      </div>
+      <div class="navbar-right">
+      </div>
+    </div>
+  </div>
+  
+  <div>
+    <h3 class="text-info">{{service.name}}</h3>
+    <div><span class="text-warning">{{method.returnType}}</span>&nbsp;{{method.name}}(
+    {{#each method.params}}
+      <span class="text-warning">{{this.typeToString}}</span>&nbsp;<span>{{name}}{{#ifNotLast ../method.params @index}}, {{/ifNotLast}}</span>
+    {{/each}}
+    )</div><br/>    
+  </div>
+  <div class="well well-sm text-muted">
+    <p>{{#if service.comment}}<pre class="comment text-muted">{{service.comment}}</pre>{{/if}}</p>
+    <p>{{#if method.comment}}<pre class="comment text-muted">{{method.comment}}</pre>{{else}}No comments for this method!{{/if}}</p>
+    <span><i>Parameters:</i></span><br/>
+    {{#each method.params}}
+      <span>&nbsp;&nbsp;&nbsp;&nbsp;{{name}}&nbsp;-&nbsp;{{#if comment}}{{comment}}{{else}}<i>no details</i>{{/if}}</span><br/>
+    {{/each}}
+  </div>
+  
+  <ul id="harnessTabs" class="nav nav-tabs">
+    <li><a href="#home" data-toggle="tab">Try Me</a></li>
+    <li><a href="#results" data-toggle="tab">Results</a></li>
+    <li class="dropdown">
+      <a class="dropdown-toggle" data-toggle="dropdown" href="#">Other Methods<span class="caret"></span></a>
+      <ul class="dropdown-menu">
+        {{#each service.methodArray}} 
+          <li><a href="{{../baseUrl}}#srv/{{../service.name}}/{{name}}" target="_top">{{name}}</a></li>   
+        {{/each}} 
+      </ul>
+    </li>    
+  </ul>  
+  <br/>
+  <div class="tab-content">
+  
+    <div id="home" class="row tab-pane">
+      <div class="tab-content col-md-7">   
+      
+        <ul id="trymeTabs" class="nav nav-tabs">
+          <li><a href="#jsonpanel" data-toggle="tab">JSON</a></li>
+          <li><a href="#headerspanel" data-toggle="tab">Headers&nbsp;<span class="badge">{{service.api.headers.length}}</span></a></li>
+          <li class="pull-right"><button type="button" class="btn btn-default reset" style="margin-left: 10px;">Reset</button></li>
+          <li class="pull-right"><button type="button" class="btn btn-primary submit">Post</button></li>
+        </ul>       
+      
+        <div id="jsonpanel" class="tab-pane" style="margin-top: 20px;">
+          <form accept-charset='UTF-8' class='contentForm'>         
+            <div class="form-group">
+              <textarea class="form-control" rows="25" cols="90">{{method.sampleJSON}}</textarea>                        
+            </div>
+          </form>            
+        </div>
+        
+        <div id="headerspanel" class="tab-pane" style="margin-top: 20px;">
+          <form accept-charset='UTF-8' class='headersForm'> 
+            <div class="form-group">
+              <input id="url" type="hidden" name="url" class="form-control serviceUrl" value="{{service.api.serviceUrl}}/{{service.name}}/{{method.name}}"/>            
+            </div>          
+            {{#each service.api.headers}}        
+              <div class="form-group">
+                <label for="{{name}}">{{name}}:&nbsp;</label>
+                <input type="text" name="{{name}}" class="form-control header" {{#if val}}value="{{val}}"{{/if}}>              
+              </div>
+            {{/each}}          
+          </form>
+        </div>         
+               
+      </div>
+      
+      <div class="tab-content col-md-5">
+        <ul id="objectTabs" class="nav nav-tabs">
+          <li><a href="#structpanel" data-toggle="tab">Structs</a></li>
+          <li><a href="#enumpanel" data-toggle="tab">Enums</a></li>          
+        </ul>
+        <div id="structpanel" class="tab-pane" style="margin-top: 20px;">
+          {{#each structs}}
+            <div class="well">
+              <span class="text-muted"><pre class="comment text-muted">{{#if comment}}{{comment}}{{else}}/// -- No Comments!{{/if}}</pre></span><br/>
+              <span><strong>{{name}}{{#if parent}}&nbsp;extends&nbsp;{{parent}} { {{else}}&nbsp; { {{/if}}</strong></span><br/>
+              {{#each propsArray}}
+                <div style="padding-left: 8px;">
+                  <span class="text-warning">{{this.typeToString}}</span>&nbsp;<span>{{this.name}}</span>{{#if comment}}<span class="text-muted"><em>&nbsp;({{comment}})</em></span></span>{{/if}}
+                </div>
+              {{/each}}
+              <span><strong>}</strong></span>
+            </div>
+          {{/each}}         
+        </div>
+        <div id="enumpanel" class="tab-pane" style="margin-top: 20px;">
+          {{#each enums}}
+            <div class="well">
+              <span class="text-muted"><pre class="comment text-muted">{{#if comment}}{{comment}}{{else}}/// -- No Comments!{{/if}}</pre></span><br/>
+              <span><strong>{{name}} {</strong></span><br/>
+              {{#each values}}
+                <div style="padding-left: 8px;">
+                  <span class="text-warning">{{name}}</span>&nbsp;=&nbsp;<span>{{val}}</span>
+                </div>
+              {{/each}}
+              <span><strong>}</strong></span>
+            </div>
+          {{/each}}         
+        </div>                 
+      </div>    
+      
+    </div> 
+    
+    <div id="results" class="tab-pane">
+      <div class="row">
+        <div class="col-md-12">
+          <pre><code id="postResult"></code></pre>
+        </div>
+      </div>
+      <div id="postErrorPanel" class="row">
+        <div class="col-md-12">
+          <pre><code id="postError"></code></pre>
+        </div>
+      </div>
+    </div>   
+  
+  </div>
+   
+</div>

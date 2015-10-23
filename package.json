@@ -1,0 +1,19 @@
+{
+  "name": "babel-ui",
+  "version": "0.0.1",
+  "description": "A HTTP JSON Test Harness for Babel RPC",
+  "scripts": {
+    "build": "cake dist"
+  },
+  "author": "Craig Lenzen",
+  "readmeFilename": "README.md",
+  "dependencies": {
+    "coffee-script": "~1.5.0",
+    "handlebars": "~1.0.10",
+    "uglify-js":"2.4.0",
+    "rimraf": "2.2.2",
+	"mkdirp": "0.5.0",
+    "wrench":"1.5.1",
+    "glob":"3.2.6"
+  }  
+}

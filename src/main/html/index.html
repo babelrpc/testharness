@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Test Harness</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel='stylesheet' href='css/default.css'/>
+  <script src='lib/jquery-1.10.2.min.js' type='text/javascript'></script>
+  <script src='lib/handlebars-1.0.0.js' type='text/javascript'></script>
+  <script src='lib/underscore-min.js' type='text/javascript'></script>
+  <script src='lib/backbone-min.js' type='text/javascript'></script>
+  <script src='lib/shred.bundle.js' type='text/javascript'></script>
+  <script src='lib/bootstrap.min.js' type='text/javascript'></script>
+  <script src='babel-ui.min.js' type='text/javascript'></script>
+  <script type="text/javascript">
+    $(function () {
+      window.babelUi = new BabelUi({
+      // url: "babel.json", set this in case you want to host a babel.json file outside the root babe test harness directory
+      dom_id: "babel-ui-container"
+    });
+    Backbone.history.start();    
+      
+  });
+
+  </script>
+</head>
+<body>
+  <div id="babel-ui-container">
+  </div>  
+</body>
+</html>

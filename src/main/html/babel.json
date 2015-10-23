@@ -1,0 +1,15 @@
+{
+  "headers":[
+    {
+      "name":"ENTITY_CODE",
+      "value":"phos123488"
+    }
+  ],
+  "serviceUrl":"/babel",
+  "services":[
+    {
+      "name":"ExpenseService",
+      "path":"/test/services/ExpenseService.json"
+    }    
+  ]  
+}
